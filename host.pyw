@@ -2,12 +2,7 @@ import thread
 from ChatFns import *
 
 
-
-#---------------------------------------------------#
-#---------INITIALIZE CONNECTION VARIABLES-----------#
-#---------------------------------------------------#
-#Initiate socket and bind port to host PC
-WindowTitle = 'JChat v0.1 - Host'
+WindowTitle = 'HOST'
 s = socket(AF_INET, SOCK_STREAM)
 HOST = gethostname()
 PORT = 8011
@@ -33,25 +28,12 @@ def ClickAction():
     #Send my mesage to all others
     conn.sendall(EntryText.encode('utf8'))
     
-
-	
-
-	
-#---------------------------------------------------#
-#----------------- KEYBOARD EVENTS -----------------#
-#---------------------------------------------------#
 def PressAction(event):
 	EntryBox.config(state=NORMAL)
 	ClickAction()
 def DisableEntry(event):
 	EntryBox.config(state=DISABLED)
 
-    
-
-
-#---------------------------------------------------#
-#-----------------GRAPHICS MANAGEMENT---------------#
-#---------------------------------------------------#
 
 #Create a window
 base = Tk()
@@ -98,11 +80,13 @@ def GetConnected():
     while 1:
         try:
             data = conn.recv(1024)
+            if data == '': #don't need this step for client in windows; but when using client in mac the above line keeps running and returning '' after connecting.  Seems socket won't be forcibly closed remotely.
+                conn.close()
             LoadOtherEntry(ChatLog, data)
-            if base.focus_get() == None:
-                FlashMyWindow(WindowTitle)
-                playsound('notif.wav')
-        except:
+            #if base.focus_get() == None:
+            #    FlashMyWindow(WindowTitle)
+            #    playsound('notif.wav')
+        except Exception as e:
             LoadConnectionInfo(ChatLog, '\n [ Your partner has disconnected ]\n [ Waiting for him to connect..] \n  ')
             GetConnected()
 

@@ -54,13 +54,15 @@ def ReceiveData():
         try: 
             data=''# make sure data doesn't remain the value read from previous iteration if the next s.recv() command won't succeed
             data = s.recv(1024)
+            if data == '':
+                raise
         except:
             #if i != 0:
             disconnect_msg = '\nYour partner is disconnected D;\n'
             LoadConnectionInfo(ChatLog, disconnect_msg)
             logfile.write(disconnect_msg)
-            initMixer()
-            playmusic('Blop.mp3')
+            #initMixer()
+            #playmusic('Blop.mp3')
             while 1: #loop2: repeatly try connecting
                 try:
                     hostvalue = HOSTlist[i%len(HOSTlist)]
@@ -73,8 +75,8 @@ def ReceiveData():
                     connect_msg = '\nYour partner is connected ;D\n'
                     LoadConnectionInfo(ChatLog, connect_msg)
                     logfile.write(connect_msg+'\n')
-                    initMixer()
-                    playmusic('Atone.mp3')
+                    #initMixer()
+                    #playmusic('Atone.mp3')
 
                     try: #if got disconnected at this point, need to get out of loop2 in this way
                         data = s.recv(1024)
