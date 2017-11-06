@@ -8,7 +8,7 @@ Usage:
 from setuptools import setup
 
 APP = ['myclient.pyw']
-DATA_FILES = ['ATone.mp3','Blop.mp3','transparent.png']
+DATA_FILES = ['ATone.mp3','Blop.mp3','transparent.png','easteregg.mp3']
 OPTIONS = {
     'iconfile': 'kokota.icns'
 }

@@ -11,7 +11,7 @@ root = Tk()
 #root.tk.call('tk', 'scaling',1.5 )
 root.title(WindowTitle)
 w,h=350,500
-root.geometry("%dx%d"%(w,h))
+root.geometry("%dx%d+100+100"%(w,h))
 root.resizable(width=FALSE, height=FALSE)
 #image = Image.open('transparent.png')
 #img = ImageTk.PhotoImage(image)
@@ -39,6 +39,10 @@ def ConnectSocket(s,logfile):
                     
             #Send my mesage to all others
             s.sendall(EntryText.encode('utf8'))
+            if EntryText == 'So you want to write a fugue!\n':
+                pygame.mixer.init()
+                pygame.mixer.music.load('easteregg.mp3')
+                pygame.mixer.music.play()
             logfile.write('You:')
             logfile.write(EntryText.encode('utf8'))
     def DisableEntry(event):
