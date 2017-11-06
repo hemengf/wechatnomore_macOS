@@ -2,43 +2,43 @@ from Tkinter import *
 from socket import *
 import urllib
 import re
-import pygame
+#import pygame
 #import win32gui
 
-def getmixerargs():
-    pygame.mixer.init()
-    freq, size, chan = pygame.mixer.get_init()
-    return freq, size, chan
-def initMixer():
-    BUFFER = 3072  # audio buffer size, number of samples since pygame 1.8.
-    FREQ, SIZE, CHAN = getmixerargs()
-    pygame.mixer.init(FREQ, SIZE, CHAN, BUFFER)
-def playsound(soundfile):
-    """Play sound through default mixer channel in blocking manner.
-       This will load the whole sound into memory before playback
-    """    
-    pygame.init()
-    pygame.mixer.init()
-    sound = pygame.mixer.Sound(soundfile)
-    clock = pygame.time.Clock()
-    sound.play()
-    while pygame.mixer.get_busy():
-        clock.tick(1000)        
-def playmusic(soundfile):
-    """Stream music with mixer.music module in blocking manner.
-       This will stream the sound from disk while playing.
-    """
-    pygame.init()
-    pygame.mixer.init()
-    clock = pygame.time.Clock()
-    pygame.mixer.music.load(soundfile)
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        clock.tick(1000)
-def stopmusic():
-    """stop currently playing music"""
-    pygame.mixer.music.stop()
-
+#def getmixerargs():
+#    pygame.mixer.init()
+#    freq, size, chan = pygame.mixer.get_init()
+#    return freq, size, chan
+#def initMixer():
+#    BUFFER = 3072  # audio buffer size, number of samples since pygame 1.8.
+#    FREQ, SIZE, CHAN = getmixerargs()
+#    pygame.mixer.init(FREQ, SIZE, CHAN, BUFFER)
+#def playsound(soundfile):
+#    """Play sound through default mixer channel in blocking manner.
+#       This will load the whole sound into memory before playback
+#    """    
+#    pygame.init()
+#    pygame.mixer.init()
+#    sound = pygame.mixer.Sound(soundfile)
+#    clock = pygame.time.Clock()
+#    sound.play()
+#    while pygame.mixer.get_busy():
+#        clock.tick(1000)        
+#def playmusic(soundfile):
+#    """Stream music with mixer.music module in blocking manner.
+#       This will stream the sound from disk while playing.
+#    """
+#    pygame.init()
+#    pygame.mixer.init()
+#    clock = pygame.time.Clock()
+#    pygame.mixer.music.load(soundfile)
+#    pygame.mixer.music.play()
+#    while pygame.mixer.music.get_busy():
+#        clock.tick(1000)
+#def stopmusic():
+#    """stop currently playing music"""
+#    pygame.mixer.music.stop()
+#
 #HOW TO PLAY SONG:
 #initMixer()
 #playmusic('ATone.mp3')
@@ -54,10 +54,9 @@ def stopmusic():
 #    win32gui.FlashWindow(ID2,True)    
 
 HOSTlist=[]
-#HOSTlist.append('98.206.166.148')
+HOSTlist.append('98.206.166.148')
 HOSTlist.append('128.135.35.65')
-HOSTlist.append('128.135.35.177')
-#HOSTlist.append('128.135.98.185')
+#HOSTlist.append('128.135.35.177')
 
 def GetExternalIP():
     url = "http://checkip.dyndns.org"
@@ -98,7 +97,7 @@ def LoadMyEntry(ChatLog, EntryText):
             LineNumber = float(ChatLog.index('end'))-1.0
             ChatLog.insert(END, "You: " + EntryText)
             ChatLog.tag_add("You", LineNumber, LineNumber+0.4)
-            ChatLog.tag_config("You", foreground="#b2433e", font=("Arial", 14, "bold"))
+            ChatLog.tag_config("You", foreground="#b2433e", font=("Inconsolata", 16, "bold"))
             ChatLog.config(state=DISABLED)
             ChatLog.yview(END)
 
@@ -113,7 +112,7 @@ def LoadOtherEntry(ChatLog, EntryText):
                 pass
             ChatLog.insert(END, 'YourPartner: ' + EntryText)
             ChatLog.tag_add('YourPartner: ', LineNumber, LineNumber+0.12)
-            ChatLog.tag_config('YourPartner: ', foreground="#3e73b2", font=("Arial", 14, "bold"))
+            ChatLog.tag_config('YourPartner: ', foreground="#3e73b2", font=("Inconsolata", 16, "bold"))
             ChatLog.config(state=DISABLED)
             ChatLog.yview(END)
             
