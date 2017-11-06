@@ -5,7 +5,7 @@ import sys
 import datetime
 import pygame
 
-WindowTitle = ''
+WindowTitle = 'Words without a Song'
 PORT = 8011
 root = Tk()
 #root.tk.call('tk', 'scaling',1.5 )
@@ -24,6 +24,8 @@ ChatLog.config(state=DISABLED)
 EntryBox = Text(root, bd=0, bg="white",width="29", height="5", font=("Inconsolata",16))
 ChatLog.place(x=0,y=6, height=h/1.5, width=w)
 EntryBox.place(x=0, y=h/1.5, height=h-h/1.5, width=w)
+def quitfunction():
+    root.destroy()
 
 def ConnectSocket(s,logfile):
     def PressAction(event):
@@ -39,10 +41,12 @@ def ConnectSocket(s,logfile):
                     
             #Send my mesage to all others
             s.sendall(EntryText.encode('utf8'))
-            if EntryText == 'So you want to write a fugue!\n':
-                pygame.mixer.init()
-                pygame.mixer.music.load('easteregg.mp3')
-                pygame.mixer.music.play()
+            if EntryText == 'exit()\n':
+                quitfunction()
+            if EntryText == 'poem()\n':
+               fpoem = open('POEM','r') 
+               POEM = fpoem.read() 
+               LoadOtherEntry(ChatLog, POEM) 
             logfile.write('You:')
             logfile.write(EntryText.encode('utf8'))
     def DisableEntry(event):
